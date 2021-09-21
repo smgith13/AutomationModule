@@ -1,0 +1,4 @@
+org\sghs\elease\automation\testScripts\AlertTestScripts.class
+org\sghs\elease\automation\testScripts\BaseTest.class
+org\sghs\elease\automation\testScripts\ElementTestScripts.class
+org\sghs\elease\automation\testScripts\RunForms.class

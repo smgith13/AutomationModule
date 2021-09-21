@@ -1,0 +1,5 @@
+org\sghs\elease\automation\webPages\AlertPage.class
+org\sghs\elease\automation\webPages\FormsPage.class
+org\sghs\elease\automation\utiities\GlobalFunctions.class
+org\sghs\elease\automation\webPages\ElementsPage.class
+org\sghs\elease\automation\webPages\LandingPage.class

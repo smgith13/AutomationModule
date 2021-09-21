@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 1, Errors: 0, Skipped: 2, Time elapsed: 8.168 sec <<< FAILURE! - in TestSuite
+clickWebTables(org.sghs.elease.automation.testScripts.ElementTestScripts)  Time elapsed: 0.149 sec  <<< FAILURE!
+java.lang.AssertionError: expected [false] but found [true]
+	at org.sghs.elease.automation.testScripts.ElementTestScripts.clickWebTables(ElementTestScripts.java:81)
+
