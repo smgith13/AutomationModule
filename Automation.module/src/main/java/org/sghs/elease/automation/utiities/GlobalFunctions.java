@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
+
+import javax.imageio.ImageIO;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,6 +20,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public class GlobalFunctions {
 
@@ -27,6 +34,7 @@ public class GlobalFunctions {
 	protected WebDriver driver;
 	WebDriverWait wait;
 	ChromeOptions options;
+	Screenshot screenshot;
 	private final String propertyfilepath = userdir + "//Config.properties";
 
 	public GlobalFunctions() {
@@ -93,6 +101,9 @@ public class GlobalFunctions {
 		return driver;
 	}
 
+	
+	
+	
 	public void clickElement(String locator) {
 		driver.findElement(By.xpath(locator)).click();
 
@@ -147,8 +158,24 @@ public class GlobalFunctions {
 	public void tearDown() {
 		driver.close();
 	}
+	
 	public void jseClick(String locator) {
 	WebElement st_1 = driver.findElement(By.id(locator));
 	 ((JavascriptExecutor)driver).executeScript("arguments[0].checked = true;", st_1);
 }
+	public void takeScreenshot() {
+		try {
+		 screenshot = new AShot().takeScreenshot(driver);
+		 screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
+		 SimpleDateFormat simpleDateFormat =
+		            new SimpleDateFormat("MMddhhmmss");
+		String dateAsString = simpleDateFormat.format(new Date());
+		ImageIO.write(screenshot.getImage(), "jpg", new File("C:\\Users\\aa\\git\\AutomationUpdate\\"+dateAsString+".jpg"));
+	}catch(Exception e){
+		System.out.println("Exception caught"+e.getMessage());
+	}
+	
+	
+	
+	}
 }
