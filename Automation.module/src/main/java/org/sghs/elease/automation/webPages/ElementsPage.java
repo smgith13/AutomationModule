@@ -108,6 +108,7 @@ public class ElementsPage {
 	}
 	public void clickWebTables() {
 		gbObj.clickElement(webTables);
+		gbObj.takeScreenshot();
 	}
 	public void clickAddButton() {
 		gbObj.clickElement(addButton);
