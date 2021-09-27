@@ -1,6 +1,7 @@
 package org.sghs.elease.automation.testScripts;
 
 import org.sghs.elease.automation.utiities.GlobalFunctions;
+import org.sghs.elease.automation.utiities.Reporter;
 import org.sghs.elease.automation.webPages.LandingPage;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
@@ -17,6 +18,9 @@ public class BaseTest {
 		gbObj = new GlobalFunctions();
 		gbObj.launchDriver();
 		gbObj.getApplicationUrl();
+		Reporter.loadReport();
+		//Reporter.startReport();
+		//Reporter.passReport();
 		
 	}
 @BeforeTest(alwaysRun=true)
@@ -29,5 +33,6 @@ public class BaseTest {
 	@AfterSuite(alwaysRun=true)
 	public void teardown() {
 		gbObj.tearDown();
+		Reporter.flushReport();
 	}
 }
