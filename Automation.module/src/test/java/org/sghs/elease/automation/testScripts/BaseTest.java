@@ -1,5 +1,6 @@
 package org.sghs.elease.automation.testScripts;
 
+import org.openqa.selenium.WebDriver;
 import org.sghs.elease.automation.utiities.GlobalFunctions;
 import org.sghs.elease.automation.utiities.Reporter;
 import org.sghs.elease.automation.webPages.LandingPage;
@@ -9,30 +10,35 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class BaseTest {
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
+public class BaseTest extends GlobalFunctions {
 	GlobalFunctions gbObj;
 	LandingPage lpObj;
+	Reporter Reporter;
+	public ExtentTest extTest;
+	ExtentReports extent;
+	protected WebDriver driver;
 
-	@BeforeSuite(alwaysRun=true)
+	@BeforeSuite(alwaysRun = true)
 	public void globalFuctions() {
 		gbObj = new GlobalFunctions();
-		gbObj.launchDriver();
+		extent = Reporter.startReport("Jano");
+		driver = gbObj.launchDriver("grid");
 		gbObj.getApplicationUrl();
-		Reporter.loadReport();
-		//Reporter.startReport();
-		//Reporter.passReport();
-		
 	}
-@BeforeTest(alwaysRun=true)
+
+	@BeforeTest(alwaysRun = true)
 	public void landingPage() {
-		lpObj = new LandingPage(gbObj.getDriver(), gbObj);
-		
+		lpObj = new LandingPage(driver, gbObj);
+
 	}
 
-
-	@AfterSuite(alwaysRun=true)
+	@AfterSuite(alwaysRun = true)
 	public void teardown() {
+
 		gbObj.tearDown();
-		Reporter.flushReport();
+		Reporter.flushTest();
 	}
 }

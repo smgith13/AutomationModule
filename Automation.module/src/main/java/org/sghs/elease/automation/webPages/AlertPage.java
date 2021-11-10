@@ -6,7 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.sghs.elease.automation.utiities.GlobalFunctions;
+
+import com.aventstack.extentreports.ExtentTest;
 
 public class AlertPage {
 
@@ -15,7 +18,27 @@ public class AlertPage {
 	private GlobalFunctions gbObj;
 	
 	//Webpage elements Page factory element.
-	@FindBy(xpath="(//*[@id='item-1'])[2]")
+	
+	@FindBy(xpath="(//*[@class='element-list collapse show']/descendant::li)[1]")
+	private WebElement sidebrowserWindow;
+	//*[@class='element-list collapse show']/descendant::li
+	
+	@FindBy(xpath="(//*[@id='tabButton'])")
+	private WebElement newtab;
+	
+	@FindBy(xpath="(//*[@id='sampleHeading'])")
+	private WebElement newtabChildText;
+	
+	//*[@id='sampleHeading']
+	@FindBy(xpath="(//*[@id='windowButton'])")
+	private WebElement newWindow;
+	
+	@FindBy(xpath="(//*[@id='messageWindowButton'])")
+	private WebElement newWindowMessage;
+	
+	
+	
+	@FindBy(xpath="(//*[@class='element-list collapse show']/descendant::li)[2]")
 	private WebElement alertClick;
 	
 	@FindBy(xpath="(//*[@id='alertButton'])")
@@ -33,33 +56,76 @@ public class AlertPage {
 	@FindBy(xpath="(//*[@id='confirmResult'])")
 	private WebElement confirmResult;
 	
+	@FindBy(xpath="(//*[@class='element-list collapse show']/descendant::li)[3]")
+	private WebElement frameClick;
+	
+	@FindBy(xpath="(//*[@id='frame1'])")
+	private WebElement frame1;
+	
+	@FindBy(xpath="(//*[@id='frame2'])")
+	private WebElement frame2;
 
+	@FindBy(xpath="(//*[@id='sampleHeading'])")
+	private WebElement frame1Text;
+	
+	@FindBy(xpath="(//*[@id='sampleHeading'])")
+	private WebElement frame2Text;
+	
 	{
 		alertPageLocators = GlobalFunctions.FileLoader("alertPagelocators");
-
-//		clickButtonToseeAlert = alertPageLocators.getProperty("clickButtonToseeAlert");
-//		timerAlertButton = alertPageLocators.getProperty("timerAlertButton");
-//		confirmButton = alertPageLocators.getProperty("confirmButton");
-//		promtButton = alertPageLocators.getProperty("promtButton");
-//		confirmResult = alertPageLocators.getProperty("confirmResult");
 	}
 
 	public AlertPage(WebDriver driver, GlobalFunctions gbObj) {
+		PageFactory.initElements(driver, this);
 		this.driver = driver;
 		this.gbObj = gbObj;
 	}
-	public void sideAlertClick() {
+	public void sideBrowserwindow(ExtentTest ext) {
 		gbObj.scroll();
-		gbObj.clickElement(alertClick);
+		gbObj.clickElement(sidebrowserWindow,ext,"sidebrowserWindow");
 	}
-	public void clickButtonToSeeAlert() {
+	
+	
+    public void newtab(ExtentTest ext) {
 		
-		gbObj.clickElement(clickButtonToseeAlert);
+		gbObj.clickElement(newtab,ext,"newtab");
+		gbObj.switchToChildWindow();
+		gbObj.getText(newtabChildText, ext, "newtabChildText"); 
+		gbObj.closeNewOpenWindow();
+		
+	}
+	
+ public void newWindow(ExtentTest ext) {
+		gbObj.clickElement(newWindow,ext,"newWindow");
+		gbObj.switchToChildWindow();
+		gbObj.getText(newtabChildText, ext, "newtabChildText"); 
+		gbObj.closeNewOpenWindow();
+		gbObj.switchToMainWindow();
+		
+		
+	}
+ 
+ public void newWindowMessage(ExtentTest ext) {
+		
+		gbObj.clickElement(newWindowMessage,ext,"newWindowMessage");
+		gbObj.switchToChildWindow();
+		gbObj.closeNewOpenWindow();
+		gbObj.switchToMainWindow();
+		
+	}
+	
+	public void sideAlertClick(ExtentTest ext) {
+		gbObj.scroll();
+		gbObj.clickElement(alertClick,ext,"sideAlertClick");
+	}
+	public void clickButtonToSeeAlert(ExtentTest ext) {
+		
+		gbObj.clickElement(clickButtonToseeAlert,ext,"clickButtonToSeeAlert");
 		gbObj.alertAccept();
 	}
-	public void timerAlertButton() {
+	public void timerAlertButton(ExtentTest ext) {
 		
-		gbObj.clickElement(timerAlertButton);
+		gbObj.clickElement(timerAlertButton,ext,"timerAlertButton");
 		try {
 		gbObj.wait(500);
 		}catch(InterruptedException e) {
@@ -67,17 +133,33 @@ public class AlertPage {
 		}
 		gbObj.alertAccept();
 	}
-	public void confirmButton() {
+	public void confirmButton(ExtentTest ext) {
 		
-		gbObj.clickElement(confirmButton);
+		gbObj.clickElement(confirmButton,ext,"confirmButton");
 		gbObj.alertDismiss();
-		gbObj.getText(confirmResult);
+		gbObj.getText(confirmResult,ext,"confirmResult");
 	}
-	public void promtButton() {
-		gbObj.clickElement(promtButton);
+	public void promtButton(ExtentTest ext) {
+		gbObj.clickElement(promtButton,ext,"promtButton");
 		gbObj.alertsendKeys();
 		gbObj.alertAccept();
 	
+	}
+	public void frameClick(ExtentTest ext) {
+		gbObj.scroll();
+		gbObj.clickElement(frameClick,ext,"frameClick");
+	}
+	
+	public void frame1(ExtentTest ext) throws Throwable {
+		gbObj.switchframe(frame1,ext,"frame1");
+		gbObj.getText(frame1Text,ext,"frame1Text");
+		gbObj.switchback();
+	}
+	public void frame2(ExtentTest ext) throws Throwable  {
+		//gbObj.framejseClick(frame2, ext, "frame2");
+		gbObj.switchframe(frame2,ext,"frame2");
+		gbObj.scroll();
+		gbObj.getText(frame2Text,ext,"frame2Text");
 	}
 	
 }

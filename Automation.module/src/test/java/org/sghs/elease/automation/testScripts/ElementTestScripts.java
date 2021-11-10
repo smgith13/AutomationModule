@@ -5,6 +5,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+
+import java.io.IOException;
+
 import org.sghs.elease.automation.utiities.GlobalFunctions;
 import org.sghs.elease.automation.utiities.Reporter;
 
@@ -14,73 +19,74 @@ public class ElementTestScripts extends BaseTest {
 
 	@BeforeClass(alwaysRun=true)
 	public void goToElementsTab() {
-		lpObj.goToElementsTab();
+		extTest=reportCreateTestCase("goToElementsTab");
+		lpObj.goToElementsTab(extTest);
 	}
 
 	@BeforeMethod(alwaysRun=true)
 	public void ElementsPage() {
-		EpObj = new ElementsPage(gbObj.getDriver(), gbObj);
-		System.out.println("beforemethod on elementTextpage");
+		extTest=reportCreateTestCase("ElementsPage");
+		EpObj = new ElementsPage(driver, gbObj);
 	}
 
 	@Test(priority=1,groups="Regression")
 	public void clicktextBox() {
-		Reporter.startReport("clicktextBox");
-		Reporter.passReport();
-		EpObj.clicktextBox();
+		extTest=reportCreateTestCase("clicktextBox");
+		EpObj.clicktextBox(extTest);
 	}
 
 	@Test(priority=1,groups="sendActions")
 	public void sendFullName() {
-		EpObj.sendFullName();
+		extTest=reportCreateTestCase("sendFullName");
+		EpObj.sendFullName(extTest);
 	}
 
 	@Test(priority=2,groups="sendActions")
 	public void sendEmail() {
-		EpObj.sendEmail();
+		extTest=reportCreateTestCase("sendEmail");
+		EpObj.sendEmail(extTest);
 	}
 
 	@Test(priority=3,groups="sendActions")
 	public void sendCurrentAddress() {
-		EpObj.sendCurrentAddress();
+		extTest=reportCreateTestCase("sendCurrentAddress");
+		EpObj.sendCurrentAddress(extTest);
 	}
 
 	@Test(priority=4,groups="sendActions")
 	public void sendPermanentAddress() {
-		EpObj.sendPermanentAddress();
+		extTest=reportCreateTestCase("sendPermanentAddress");
+		EpObj.sendPermanentAddress(extTest);
 	}
 
 	@Test(priority=5,groups="Regression")
 	public void clickSubmit() {
-		Reporter.startReport("clickSubmit");
-		Reporter.failReport();
-		EpObj.clickSubmit();
+		extTest=reportCreateTestCase("clickSubmit");
+		EpObj.clickSubmit(extTest);
 	}
 
 	@Test(priority=6,groups="Regression")
 	public void clickcheckBox() {
-		Reporter.startReport("clickcheckBox");
-		Reporter.passReport();
-		EpObj.clickcheckBox();
+		extTest=reportCreateTestCase("clickcheckBox");
+		EpObj.clickcheckBox(extTest);
 	}
 
 	@Test(priority=7,groups="Regression")
 	public void clickExpand() {
-		Reporter.startReport("clickExpand");
-		Reporter.passReport();
-		EpObj.clickExpand();
+		extTest=reportCreateTestCase("clickExpand");
+		EpObj.clickExpand(extTest);
 	}
 
 	@Test(priority=8,groups="Regression")
 	public void clickPublicCheck() {
-		Reporter.startReport("clickPublicCheck");
-		EpObj.clickPublicCheck();
+		extTest=reportCreateTestCase("clickPublicCheck");
+		EpObj.clickPublicCheck(extTest);
 	}
 
 	@Test(priority=9,groups="Regression")
 	public void clickCollapseBox() {
-		Reporter.startReport("clickCollapseBox");
-		EpObj.clickCollapseBox();
+		extTest=reportCreateTestCase("clickCollapseBox");
+		EpObj.clickCollapseBox(extTest);
 	}
 
 	// EpObj.clickRadioButton();
@@ -88,76 +94,82 @@ public class ElementTestScripts extends BaseTest {
 	// EpObj.getRadioButtonText();
 	@Test(priority=10,groups="Regression")
 	public void clickWebTables() {
-		Reporter.startReport("clickWebTables");
-		EpObj.clickWebTables();
+		extTest=reportCreateTestCase("clickWebTables");
+		EpObj.clickWebTables(extTest);
 		Assert.assertEquals(true, false);
 	}
 	@Test(priority=11,dependsOnMethods="clickWebTables",groups="Regression")
 	public void clickAddButton() {
-		Reporter.startReport("clickAddButton");
-		EpObj.clickAddButton();
+		extTest=reportCreateTestCase("clickAddButton");
+		EpObj.clickAddButton(extTest);
 	}
 
 	@Test(priority=12,dependsOnMethods="clickWebTables",groups="sendActions")
 	public void sendFirstName() {
-		EpObj.sendFirstName();
+		extTest=reportCreateTestCase("sendFirstName");
+		EpObj.sendFirstName(extTest);
 	}
 
 	@Test(priority=13,dependsOnMethods="clickWebTables",groups="sendActions")
 	public void sendLastName() {
-		EpObj.sendLastName();
+		extTest=reportCreateTestCase("sendLastName");
+		EpObj.sendLastName(extTest);
 	}
 
 	@Test(priority=14,dependsOnMethods="clickWebTables",groups="sendActions")
 	public void sendage() {
-		EpObj.sendage();
+		extTest=reportCreateTestCase("sendage");
+		EpObj.sendage(extTest);
 	}
 
 	@Test(priority=15,dependsOnMethods="clickWebTables",groups="sendActions")
 	public void sendSalary() {
-		EpObj.sendSalary();
+		extTest=reportCreateTestCase("sendSalary");
+		EpObj.sendSalary(extTest);
 	}
 
 	@Test(priority=16,dependsOnMethods="clickWebTables",groups="sendActions")
 	public void sendDepartment() {
-		EpObj.sendDepartment();
+		extTest=reportCreateTestCase("sendDepartment");
+		EpObj.sendDepartment(extTest);
 	}
 
 	@Test(priority=17,dependsOnMethods="clickWebTables",groups="sendActions")
 	public void sendEmailTable() {
-		EpObj.sendEmailTable();
+		extTest=reportCreateTestCase("sendEmailTable");
+		EpObj.sendEmailTable(extTest);
 	}
 
 	@Test(priority=18,dependsOnMethods="clickWebTables",groups="Regression")
 	public void clicksubmitTable() {
-		Reporter.startReport("clicksubmitTable");
-		EpObj.clicksubmitTable();
+		extTest=reportCreateTestCase("clicksubmitTable");
+		EpObj.clicksubmitTable(extTest);
 	}
 	@Test(priority=19,groups="Regression")
 	public void clickbuttons() {
-		Reporter.startReport("clickbuttons");
-		EpObj.clickbuttons();
+		extTest=reportCreateTestCase("clickbuttons");
+		EpObj.clickbuttons(extTest);
 	}
 	@Test(priority=20,dependsOnMethods="clickbuttons",groups="Regression")
 	public void clickdoubleClickMe() {
-		Reporter.startReport("clickdoubleClickMe");
-		EpObj.clickdoubleClickMe();
+		extTest=reportCreateTestCase("clickdoubleClickMe");
+		EpObj.clickdoubleClickMe(extTest);
 
 	}
 	@Test(priority=21,dependsOnMethods="clickbuttons",groups="Regression")
 	public void clickrightclickMe() {
-		Reporter.startReport("clickdoubleClickMe");
-		EpObj.clickrightclickMe();
+		extTest=reportCreateTestCase("clickrightclickMe");
+		EpObj.clickrightclickMe(extTest);
 	}
 	@Test(priority=22,dependsOnMethods="clickbuttons",groups="Regression")
 	public void clickClickMe() {
-		Reporter.startReport("clickClickMe");
-		EpObj.clickClickMe();
+		extTest=reportCreateTestCase("clickClickMe");
+		EpObj.clickClickMe(extTest);
 	}
 	@Test(priority=23,groups="Regression")
 	public void clicklinks() {
-		Reporter.startReport("clicklinks");
-		EpObj.clicklinks();
+		extTest=reportCreateTestCase("clicklinks");
+		EpObj.clicklinks(extTest);
 	}
 //	@Test(priority=24,dependsOnMethods="clicklinks",groups="Regression")
 //	public void clickHome() {
@@ -171,38 +183,80 @@ public class ElementTestScripts extends BaseTest {
 //	}
 	@Test(priority=26,dependsOnMethods="clicklinks",groups="Regression")
 	public void clickCreated() {
-		Reporter.startReport("clickCreated");
-		EpObj.clickCreated();
+		extTest=reportCreateTestCase("clickCreated");
+		EpObj.clickCreated(extTest);
 	}
 	@Test(priority=27,dependsOnMethods="clicklinks",groups="Regression")
 	public void clickNoContent() {
-		Reporter.startReport("clickNoContent");
-		EpObj.clickNoContent();
+		extTest=reportCreateTestCase("clickNoContent");
+		EpObj.clickNoContent(extTest);
 	}
 	@Test(priority=28,dependsOnMethods="clicklinks",groups="Regression")
 	public void clickMoved() {
-		Reporter.startReport("clickMoved");
-		EpObj.clickMoved();
+		extTest=reportCreateTestCase("clickMoved");
+		EpObj.clickMoved(extTest);
 	}
 	@Test(priority=29,dependsOnMethods="clicklinks",groups="Regression")
 	public void clickBadRequest() {
-		Reporter.startReport("clickBadRequest");
-		EpObj.clickBadRequest();
+		extTest=reportCreateTestCase("clickBadRequest");
+		EpObj.clickBadRequest(extTest);
 	}
 	@Test(priority=30,dependsOnMethods="clicklinks",groups="Regression")
 	public void clickUnauthorized() {
-		Reporter.startReport("clickUnauthorized");
-		EpObj.clickUnauthorized();
+		extTest=reportCreateTestCase("clickUnauthorized");
+		EpObj.clickUnauthorized(extTest);
 	}
 	@Test(priority=31,dependsOnMethods="clicklinks",groups="Regression")
-	public void Forbidden() {
-		Reporter.startReport("Forbidden");
-		EpObj.Forbidden();
+	public void forbidden() {
+		extTest=reportCreateTestCase("Forbidden");
+		EpObj.Forbidden(extTest);
 	}
 	@Test(priority=32,dependsOnMethods="clicklinks",groups="Regression")
-	public void NotFound() {
-		Reporter.startReport("NotFound");
-		EpObj.NotFound();
+	public void notFound() {
+		extTest=reportCreateTestCase("NotFound");
+		EpObj.NotFound(extTest);
+	}
+	@Test(priority=33,groups="Regression")
+	public void brokenLinksAndImage() throws IOException, Throwable {
+		extTest=reportCreateTestCase("brokenLinksAndImage");
+		EpObj.brokenLinksAndImage(extTest);
 	}
 	
+	@Test(priority=34,groups="Regression")
+	public void validLink() throws IOException, Throwable {
+		extTest=reportCreateTestCase("ValidLinks");
+		EpObj.validLink(extTest);
+	}
+	
+	@Test(priority=35,groups="Regression")
+	public void uploadAnddownload() {
+		extTest=reportCreateTestCase("uploadAnddownload");
+		EpObj.uploadAnddownload(extTest);
+	}
+	@Test(priority=36,groups="Regression")
+	public void download() throws IOException, Throwable {
+		extTest=reportCreateTestCase("download");
+		EpObj.download(extTest);
+	}
+	@Test(priority=37,groups="Regression")
+	public void upload() throws Throwable {
+		extTest=reportCreateTestCase("upload");
+		EpObj.upload(extTest);
+	}
+	
+	@Test(priority=38,groups="Regression")
+	public void dynamicProperties() {
+		extTest=reportCreateTestCase("dynamicProperties");
+		EpObj.dynamicProperties(extTest);
+	}
+	@Test(priority=39,groups="Regression")
+	public void Enabled() {
+		extTest=reportCreateTestCase("upload");
+		EpObj.enableAfter(extTest);
+	}
+	@Test(priority=40,groups="Regression")
+	public void visibleAfter5sec() {
+		extTest=reportCreateTestCase("visibleAfter5sec");
+		EpObj.visibleAfter5sec(extTest);
+	}
 }
