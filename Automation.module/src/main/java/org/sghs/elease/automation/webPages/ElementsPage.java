@@ -1,13 +1,19 @@
 package org.sghs.elease.automation.webPages;
 
 import java.awt.Desktop.Action;
+import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.sghs.elease.automation.utiities.GlobalFunctions;
+
+import com.aventstack.extentreports.ExtentTest;
 
 public class ElementsPage {
 	
@@ -16,6 +22,11 @@ public class ElementsPage {
 	private GlobalFunctions gbObj;
 	
 	//Page Factory method
+	
+	
+	//@FindBy(how=How.TAG_NAME,using="a")
+	//List<WebElement> links1;
+	
 	@FindBy(xpath="(//*[@class='element-group']/descendant::li)[1]")
 	private WebElement textBoxClick;
 	
@@ -49,7 +60,7 @@ public class ElementsPage {
 	@FindBy(xpath="(//*[@title='Collapse all'])")
 	private WebElement CollapseBox;
 	
-	@FindBy(xpath="(//*[@class='rct-checkbox'])[11]")
+	@FindBy(xpath="(//*[@class='rct-checkbox'][11])")
 	private WebElement publicCheck;
 	
 	@FindBy(xpath="(//*[@id='impressiveRadio'])")
@@ -100,7 +111,7 @@ public class ElementsPage {
 	@FindBy(xpath="(//*[@id='linkWrapper']/descendant::h5)[1]")
 	private WebElement linksOpenNewTab;
 	
-	@FindBy(xpath="(//*[@id='linkWrapper']/descendant::a)[1])")
+	@FindBy(xpath="(//*[@id='linkWrapper']/descendant::a)[1]")
 	private WebElement home;
 	
 	@FindBy(xpath="(//*[@id='linkWrapper']/descendant::a)[2]")
@@ -130,14 +141,24 @@ public class ElementsPage {
 	@FindBy(xpath="(//*[@id='linkWrapper']/descendant::a)[9]")
 	private WebElement notFound;
 	
-	@FindBy(xpath="(//*[@class='element-group']/descendant::li)[8]")
+	@FindBy(xpath="(//*[@class='element-group']/descendant::li)[7]")
+	private WebElement brokenLinksAndImage;
+	
+	//Broken link validation
+	@FindBy(xpath="(//*[@class='col-12 mt-4 col-md-6']/descendant::a)")
+	private List<WebElement> brokenLinks;
+	
+	@FindBy(xpath="(//*[@class='element-group']/descendant::li[8])")
 	private WebElement uploadAnddownload;
 	
-	@FindBy(xpath="(//*[@class='col-12 mt-4 col-md-6']/descendant::a)")
+	@FindBy(xpath="(//*[@class='col-12 mt-4 col-md-6']/descendant::div/div/a)")
 	private WebElement download;
 	
-	@FindBy(xpath="(//*[@class='col-12 mt-4 col-md-6']/descendant::input)")
+	@FindBy(xpath="(//*[@class='form-file']/descendant::input")
 	private WebElement chooseFile;
+	
+	@FindBy(xpath="(//*[@id='uploadFile'])")
+	private WebElement upload;
 	
 	
 	@FindBy(xpath="(//*[@id='linkResponse'])")
@@ -152,151 +173,204 @@ public class ElementsPage {
 	
 	@FindBy(xpath="(//*[@id='dynamicClickMessage'])")
 	private WebElement dynamicClickMessage;
+	
+	@FindBy(xpath="(//*[@class='col-12 mt-4 col-md-6']/descendant::button)[1]")
+	private WebElement enableAfter;
+	
+	@FindBy(xpath="(//*[@class='col-12 mt-4 col-md-6']/descendant::button)[2]")
+	private WebElement colourChange;
+	
+	@FindBy(xpath="(//*[@class='col-12 mt-4 col-md-6']/descendant::button)[3]")
+	private WebElement visibleAfter5sec;
+	
+	@FindBy(xpath="(//*[@class='element-group']/descendant::li[9])")
+	private WebElement dynamicProperties;
+	
 	{
 		Properties elementPagelocators = GlobalFunctions.FileLoader("elementpagelocators");
-//		 textBoxClick = elementPagelocators.getProperty("textBox");
-//		 fullName = elementPagelocators.getProperty("fullName");
-//		 email = elementPagelocators.getProperty("email");
 
 	}
 
 	public ElementsPage(WebDriver driver, GlobalFunctions gbObj) {
-		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		this.driver = driver;
 		this.gbObj = gbObj;
 	}
-	public void clicktextBox() {
+	public void clicktextBox(ExtentTest ext) {
 		gbObj.scroll();
-		gbObj.clickElement(textBoxClick);
+		gbObj.clickElement(textBoxClick, ext ,"TextBox");
 	}
-	public void sendFullName() {
-		gbObj.sendText(fullName,"Monisha Mathias");
+	public void sendFullName(ExtentTest ext) {
+		gbObj.sendText(fullName,"Monisha Mathias", ext, "sendFullName");
 	}
-	public void sendEmail() {
-		gbObj.sendText(email,"MonishaJanorees@yahoo.com");
+	public void sendEmail(ExtentTest ext) {
+		gbObj.sendText(email,"MonishaJanorees@yahoo.com", ext, "sendEmail");
 	}
-	public void sendCurrentAddress() {
-		gbObj.sendText(currentAddress,"231 Nayakkar street,vallioor,Tamil Nadu");
+	public void sendCurrentAddress(ExtentTest ext) {
+		gbObj.sendText(currentAddress,"231 Nayakkar street,vallioor,Tamil Nadu", ext, "sendCurrentAddress");
 	}
-	public void sendPermanentAddress() {
-		gbObj.sendText(permanentAddress,"6 Megan Avenue scarborough");
+	public void sendPermanentAddress(ExtentTest ext) {
+		gbObj.sendText(permanentAddress,"6 Megan Avenue scarborough", ext, "sendPermanentAddress");
 	}
-	public void clickSubmit() {
+	public void clickSubmit(ExtentTest ext) {
 		gbObj.scroll();
-		gbObj.clickElement(submit);
+		gbObj.clickElement(submit,ext ,"submit");
 	}
-	public void clickcheckBox() {
-		gbObj.clickElement(checkBox);
+	public void clickcheckBox(ExtentTest ext) {
+		gbObj.clickElement(checkBox, ext ,"clickcheckBox");
 	}
-	public void clickExpand() {
-		gbObj.clickElement(expandBox);
+	public void clickExpand(ExtentTest ext) {
+		gbObj.clickElement(expandBox, ext ,"clickExpand");
 	}
-	public void clickPublicCheck() {
-		gbObj.clickElement(publicCheck);
+	public void clickPublicCheck(ExtentTest ext) {
+		gbObj.clickElement(publicCheck, ext ,"clickPublicCheck");
 	}
-	public void clickCollapseBox() {
-		gbObj.clickElement(CollapseBox);
+	public void clickCollapseBox(ExtentTest ext) {
+		gbObj.clickElement(CollapseBox, ext ,"clickCollapseBox");
 	}
-	public void clickRadioButton() {
-		gbObj.clickElement(radioButton);
+	public void clickRadioButton(ExtentTest ext) {
+		gbObj.clickElement(radioButton, ext ,"clickRadioButton");
 	}
-	public void clickImpressivebutton() {
-		gbObj.clickElement(impressivebutton);
+	public void clickImpressivebutton(ExtentTest ext) {
+		gbObj.clickElement(impressivebutton, ext ,"clickImpressivebutton");
 	}
-	public void getRadioButtonText() {
-		gbObj.getText(getText);
+	public void getRadioButtonText(ExtentTest ext) {
+		gbObj.getText(getText, ext ,"getRadioButtonText");
 	}
-	public void clickWebTables() {
-		gbObj.clickElement(webTables);
+	public void clickWebTables(ExtentTest ext) {
+		gbObj.clickElement(webTables, ext ,"clickWebTables");
 		gbObj.takeScreenshot();
 	}
-	public void clickAddButton() {
-		gbObj.clickElement(addButton);
+	public void clickAddButton(ExtentTest ext) {
+		gbObj.clickElement(addButton, ext ,"clickAddButton");
 	}
-	public void sendFirstName() {
-		gbObj.sendText(firstName,"Monisha");
+	public void sendFirstName(ExtentTest ext) {
+		gbObj.sendText(firstName,"Monisha", ext, "sendFirstName");
 	}
-	public void sendLastName() {
-		gbObj.sendText(lastName,"Jano");
+	public void sendLastName(ExtentTest ext) {
+		gbObj.sendText(lastName,"Jano", ext, "sendLastName");
 	}
-	public void sendEmailTable() {
-		gbObj.sendText(emailTable,"MonishaJanorees@yahoo.com");
+	public void sendEmailTable(ExtentTest ext) {
+		gbObj.sendText(emailTable,"MonishaJanorees@yahoo.com", ext, "sendEmailTable");
 	}
-	public void sendage() {
-		gbObj.sendText(age,"22");
+	public void sendage(ExtentTest ext) {
+		gbObj.sendText(age,"22", ext, "sendage");
 	}
-	public void sendSalary() {
-		gbObj.sendText(salary,"1000");
+	public void sendSalary(ExtentTest ext) {
+		gbObj.sendText(salary,"1000", ext, "sendSalary");
 	}
-	public void sendDepartment() {
-		gbObj.sendText(department,"ECE");
+	public void sendDepartment(ExtentTest ext) {
+		gbObj.sendText(department,"ECE", ext, "sendDepartment");
 	}
-	public void clicksubmitTable() {
-		gbObj.clickElement(submitTable);
+	public void clicksubmitTable(ExtentTest ext) {
+		gbObj.clickElement(submitTable, ext ,"clicksubmitTable");
 	}
-	public void clickbuttons() {
-		gbObj.clickElement(buttons);
+	public void clickbuttons(ExtentTest ext) {
+		gbObj.clickElement(buttons, ext ,"clickbuttons");
 	}
-	public void clickdoubleClickMe() {
-		gbObj.doubleClick(doubleClickMe);
-		gbObj.getText(doubleClickMessage);
+	public void clickdoubleClickMe(ExtentTest ext) {
+		gbObj.doubleClick(doubleClickMe, ext ,"clickdoubleClickMe");
+		gbObj.getText(doubleClickMessage, ext ,"doubleClickMessage");
 
 	}
-	public void clickrightclickMe() {
-		gbObj.rightclick(rightclickMe);
-		gbObj.getText(rightClickMessage);
+	public void clickrightclickMe(ExtentTest ext) {
+		gbObj.rightclick(rightclickMe, ext ,"clickrightclickMe");
+		gbObj.getText(rightClickMessage, ext ,"rightClickMessage");
 	}
-	public void clickClickMe() {
-		gbObj.clickElement(ClickMe);
-		gbObj.getText(dynamicClickMessage);
+	public void clickClickMe(ExtentTest ext) {
+		gbObj.clickElement(ClickMe, ext ,"clickClickMe");
+		gbObj.getText(dynamicClickMessage, ext ,"dynamicClickMessage");
 	}
-	public void clicklinks() {
+	public void clicklinks(ExtentTest ext) {
 		gbObj.scroll();
-		gbObj.clickElement(links);
+		gbObj.clickElement(links, ext ,"clicklinks");
 	}
 	
-	public void clickHome() {
-		gbObj.clickElement(home);
+	public void clickHome(ExtentTest ext) {
+		gbObj.clickElement(home, ext ,"clickHome");
 		gbObj.switchToChildWindow();
-		gbObj.getPageTitle();
+		gbObj.getPageTitle(ext, "clickHome");
 		gbObj.switchToMainWindow();
 	}
-	public void clickHome8icZX() {
-		gbObj.clickElement(hometG1Kc);
-		gbObj.getText(hometG1Kc);
+	public void clickHome8icZX(ExtentTest ext) {
+		gbObj.clickElement(hometG1Kc, ext ,"clickHome8icZX");
+		gbObj.getText(hometG1Kc, ext ,"hometG1Kc");
 	}
-	public void clickCreated() {
-		gbObj.clickElement(created);
+	public void clickCreated(ExtentTest ext) {
+		gbObj.clickElement(created, ext ,"clickCreated");
 		gbObj.sleep();
-		gbObj.getText(linkResponse);
+		gbObj.getText(linkResponse, ext ,"linkResponse");
 	}
-	public void clickNoContent() {
+	public void clickNoContent(ExtentTest ext) {
 		gbObj.scroll();
-		gbObj.clickElement(noContent);
+		gbObj.clickElement(noContent, ext ,"clickNoContent");
 		gbObj.sleep();
-		gbObj.getText(linkResponse);
+		gbObj.getText(linkResponse, ext ,"linkResponse");
 	}
-	public void clickMoved() {
-		gbObj.clickElement(moved);
+	public void clickMoved(ExtentTest ext) {
+		gbObj.clickElement(moved, ext ,"clickMoved");
 		gbObj.sleep();
-		gbObj.getText(linkResponse);
+		gbObj.getText(linkResponse, ext ,"linkResponse");
 	}
-	public void clickBadRequest() {
-		gbObj.clickElement(badRequest);
-		gbObj.getText(linkResponse);
+	public void clickBadRequest(ExtentTest ext) {
+		gbObj.clickElement(badRequest, ext ,"clickBadRequest");
+		gbObj.getText(linkResponse, ext ,"linkResponse");
 	}
-	public void clickUnauthorized() {
-		gbObj.clickElement(unauthorized);
-		gbObj.getText(linkResponse);
+	public void clickUnauthorized(ExtentTest ext) {
+		gbObj.clickElement(unauthorized, ext ,"clickUnauthorized");
+		gbObj.getText(linkResponse, ext ,"linkResponse");
 	}
-	public void Forbidden() {
-		gbObj.clickElement(forbidden);
-		gbObj.getText(linkResponse);
+	public void Forbidden(ExtentTest ext) {
+		gbObj.clickElement(forbidden, ext ,"Forbidden");
+		gbObj.getText(linkResponse, ext ,"linkResponse");
 	}
-	public void NotFound() {
-		gbObj.clickElement(notFound);
-		gbObj.getText(linkResponse);
+	public void NotFound(ExtentTest ext) {
+		gbObj.clickElement(notFound, ext ,"NotFound");
+		gbObj.getText(linkResponse, ext ,"linkResponse");
 	}
+	public void brokenLinksAndImage(ExtentTest ext) {
+		gbObj.scroll();
+		gbObj.clickElement(brokenLinksAndImage, ext ,"brokenLinksAndImage");
+	}
+	public void validLink(ExtentTest ext) throws IOException, Throwable {
+		gbObj.brokenlist(brokenLinks);
+		
+	}
+	public void uploadAnddownload(ExtentTest ext) {
+		gbObj.scroll();
+		gbObj.clickElement(uploadAnddownload, ext ,"uploadAnddownload");
+		
+	}
+	public void download(ExtentTest ext) throws IOException, Throwable {
+		gbObj.clickElement(download, ext ,"download");
+		System.out.println("File is download Successfully");
+
+	}
+	public void upload(ExtentTest ext) throws Throwable {
+		gbObj.clickElement(upload, ext ,"upload");
+		Runtime.getRuntime().exec("C:\\Users\\aa\\Desktop\\Java Workspace\\Downloads\\fileUpload.exe");
+		//gbObj.sendText(upload, "C:\\fakepath\\sampleFile (3).jpeg", ext, "upload");
+		System.out.println("File is Uploaded Successfully");
+	}
+	public void dynamicProperties(ExtentTest ext) {
+		gbObj.scroll();
+		gbObj.findIframe();
+		gbObj.waitForElementToBeClickable(driver, dynamicProperties);
+		gbObj.clickElement(dynamicProperties, ext ,"dynamicProperties");
+	}
+	public void enableAfter(ExtentTest ext) {
 	
-	
+		System.out.println("Element in Grey: " + gbObj.jseExecutor(enableAfter, ext, "enableAfter"));
+		String colour=colourChange.getCssValue("color");
+		System.out.println("colour is: "+colour);
+		System.out.println("Element is Visible: "+gbObj.isEnabled(visibleAfter5sec, ext, "visibleAfter5sec"));
+		gbObj.pause(5000);
+		
+}
+	public void visibleAfter5sec(ExtentTest ext) {
+		System.out.println("Element in Grey " + gbObj.jseExecutor(enableAfter, ext, "enableAfter"));
+		String colour=colourChange.getCssValue("color");
+		System.out.println("colour is: "+colour);
+		System.out.println("Element is Visible: "+gbObj.isEnabled(visibleAfter5sec, ext, "visibleAfter5sec"));
+	}		
 }
