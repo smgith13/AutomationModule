@@ -13,7 +13,7 @@ import com.aventstack.extentreports.ExtentTest;
 
 public class AlertPage {
 
-	Properties alertPageLocators;
+
 	private WebDriver driver;
 	private GlobalFunctions gbObj;
 	
@@ -71,9 +71,16 @@ public class AlertPage {
 	@FindBy(xpath="(//*[@id='sampleHeading'])")
 	private WebElement frame2Text;
 	
-	{
-		alertPageLocators = GlobalFunctions.FileLoader("alertPagelocators");
-	}
+	@FindBy(xpath="(//*[@class='element-list collapse show']/descendant::li)[5]")
+	private WebElement modalClick;
+	
+	@FindBy(xpath="(//*[@id='showSmallModal'])")
+	private WebElement smallModal;
+	
+	@FindBy(xpath="(//*[@id='showLargeModal'])")
+	private WebElement largeModal;
+	
+
 
 	public AlertPage(WebDriver driver, GlobalFunctions gbObj) {
 		PageFactory.initElements(driver, this);

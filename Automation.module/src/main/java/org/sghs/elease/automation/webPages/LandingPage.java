@@ -15,6 +15,16 @@ public class LandingPage  {
 
 	Properties landpageprop;
     WebDriver driver=null;
+    
+    @FindBy(xpath="//*[text()='Book Store Application']")
+  	WebElement BookStoreApplicationTab;
+    
+    @FindBy(xpath="(//*[text()='Interactions'])[1]")
+  	WebElement interactionssTab;
+    
+    @FindBy(xpath="(//*[text()='Widgets'])[1]")
+	WebElement widgetsTab;
+    
 	@FindBy(xpath="//*[text()='Alerts, Frame & Windows']")
 	private WebElement frameAlertTab;
 	
