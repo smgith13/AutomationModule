@@ -186,10 +186,7 @@ public class ElementsPage {
 	@FindBy(xpath="(//*[@class='element-group']/descendant::li[9])")
 	private WebElement dynamicProperties;
 	
-	{
-		Properties elementPagelocators = GlobalFunctions.FileLoader("elementpagelocators");
-
-	}
+	
 
 	public ElementsPage(WebDriver driver, GlobalFunctions gbObj) {
 		PageFactory.initElements(driver, this);

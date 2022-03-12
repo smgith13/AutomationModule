@@ -30,6 +30,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.ExtentTest;
@@ -39,7 +40,7 @@ import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
-public class GlobalFunctions extends BrowserFactory {
+public class GlobalFunctions extends Reporter{
 
 	static String userdir = System.getProperty("user.dir") + "//testConfigResources";
 	String name = "janor";
@@ -47,7 +48,7 @@ public class GlobalFunctions extends BrowserFactory {
 	static Properties prop;
 	static Properties prop1;
 	static String TestProperties;
-	WebDriver driver;
+	protected WebDriver driver;
 	WebDriverWait wait;
 	ChromeOptions options;
 	Screenshot screenshot;
@@ -91,7 +92,7 @@ public class GlobalFunctions extends BrowserFactory {
 	public WebDriver launchDriver(String runOn) {
 		String key = prop1.getProperty("driverKey");
 		System.setProperty(key, System.getProperty("user.dir") + "\\driver" + "\\chromedriver.exe");
-		// System.setProperty("driverKey",userdir+"chromedriver.exe");
+		System.out.println(System.getProperty("user.dir") + "\\driver" + "\\chromedriver.exe");
 
 		if (runOn.equalsIgnoreCase("driverManager")) {
 			WebDriverManager.chromedriver().setup();
@@ -100,7 +101,7 @@ public class GlobalFunctions extends BrowserFactory {
 			driver = new ChromeDriver(options);
 		} else if (runOn.equalsIgnoreCase("grid")) {
 			System.out.println("selecting grid");
-			String Node = "http://192.168.0.54:8060/wd/hub";
+			String Node = "http://192.168.0.68:8060/wd/hub";
 			DesiredCapabilities cap = new DesiredCapabilities();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--incognito");
@@ -109,6 +110,7 @@ public class GlobalFunctions extends BrowserFactory {
 			try {
 				driver = new RemoteWebDriver(new URL(Node), cap);
 			} catch (MalformedURLException e) {
+				System.out.println("Browser exception");
 				e.printStackTrace();
 			}
 		}
@@ -137,7 +139,7 @@ public class GlobalFunctions extends BrowserFactory {
 
 	}
 
-	public void clickElement(WebElement locator, ExtentTest ext, String strElementDesc) {
+	 public void clickElement(WebElement locator, ExtentTest ext, String strElementDesc) {
 		try {
 			locator.click();
 			reportPassStep(ext, strElementDesc + "  Clicked on element ");
@@ -156,6 +158,11 @@ public class GlobalFunctions extends BrowserFactory {
 			return false;
 		}
 		return true;
+	}
+
+	public void reportPassStep(ExtentTest ext, String msg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public boolean isDisplayed(WebElement locator, ExtentTest ext, String strElementDesc) {
@@ -250,7 +257,7 @@ public class GlobalFunctions extends BrowserFactory {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",locator);
 	}
 
-	public boolean jseExecutor(WebElement locator, ExtentTest ext, String strElementDesc) {
+	public boolean jseExecutor(WebElement locator  , ExtentTest ext, String strElementDesc) {
 
 		boolean obj = (boolean) ((JavascriptExecutor) driver)
 				.executeScript("return arguments[0].hasAttribute(\"disabled\");", locator);
@@ -358,8 +365,8 @@ public class GlobalFunctions extends BrowserFactory {
 
 		}
 	}
-
-//	public void uploadfile()
-//	
-
+	public void dropdownSelection(WebElement locator,String name, ExtentTest ext, String strElementDes) {
+		Select select = new Select(locator);
+		select.selectByVisibleText(name);
+	}
 }

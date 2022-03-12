@@ -15,11 +15,11 @@ import com.aventstack.extentreports.ExtentTest;
 
 public class BaseTest extends GlobalFunctions {
 	GlobalFunctions gbObj;
-	LandingPage lpObj;
+	protected LandingPage lpObj;
 	Reporter Reporter;
 	public ExtentTest extTest;
 	ExtentReports extent;
-	protected WebDriver driver;
+
 
 	@BeforeSuite(alwaysRun = true)
 	public void globalFuctions() {
